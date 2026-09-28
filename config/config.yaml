@@ -1,0 +1,34 @@
+# Configuration for RAG From Scratch — Phase 1: Document Retrieval Engine
+
+dataset:
+  name: "hotpotqa/hotpot_qa"
+  config_name: "distractor"
+  split: "train"
+  subset_size: 500
+  random_seed: 42
+  streaming: false # Set to true to use reservoir sampling over streaming data
+
+chunking:
+  chunk_size: 500      # Maximum characters per chunk
+  chunk_overlap: 50    # Character overlap between adjacent chunks
+
+embeddings:
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  batch_size: 32
+  normalize: true
+
+retrieval:
+  top_k_values: [1, 3, 5, 10]
+  default_top_k: 5
+
+paths:
+  raw_data_dir: "data/raw"
+  raw_subset_file: "data/raw/hotpotqa_subset_500.json"
+  processed_data_dir: "data/processed"
+  documents_file: "data/processed/documents.json"
+  questions_file: "data/processed/questions.json"
+  chunks_dir: "data/chunks"
+  chunks_file: "data/chunks/chunks.json"
+  embeddings_dir: "data/embeddings"
+  embeddings_matrix_file: "data/embeddings/embeddings.npy"
+  embeddings_metadata_file: "data/embeddings/embedding_metadata.json"

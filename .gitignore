@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Testing & Linters
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data & Model Artifacts
+# Keep directories but ignore generated files
+data/raw/*
+!data/raw/.gitkeep
+
+data/processed/*
+!data/processed/.gitkeep
+
+data/chunks/*
+!data/chunks/.gitkeep
+
+data/embeddings/*
+!data/embeddings/.gitkeep
+
+data/evaluation/*
+!data/evaluation/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
