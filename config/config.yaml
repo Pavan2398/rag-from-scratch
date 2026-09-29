@@ -32,3 +32,9 @@ paths:
   embeddings_dir: "data/embeddings"
   embeddings_matrix_file: "data/embeddings/embeddings.npy"
   embeddings_metadata_file: "data/embeddings/embedding_metadata.json"
+  evaluation_dir: "data/evaluation"
+  evaluation_results_file: "data/evaluation/retrieval_results.json"
+
+evaluation:
+  top_k_values: [1, 3, 5, 10]
+  results_file: "data/evaluation/retrieval_results.json"

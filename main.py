@@ -51,6 +51,13 @@ def main() -> None:
     retrieve_parser.add_argument("--top-k", type=int, default=5, help="Number of chunks to return (default: 5)")
     retrieve_parser.add_argument("--config", default="config/config.yaml", help="Path to config.yaml")
 
+    # Evaluate command
+    evaluate_parser = subparsers.add_parser("evaluate", help="Evaluate retrieval against HotpotQA ground truth")
+    evaluate_parser.add_argument("--top-k", nargs="+", type=int, default=None, help="List of top-K values (e.g. 1 3 5 10)")
+    evaluate_parser.add_argument("--limit", type=int, default=None, help="Limit number of questions to evaluate")
+    evaluate_parser.add_argument("--config", default="config/config.yaml", help="Path to config.yaml")
+    evaluate_parser.add_argument("--output", type=str, default=None, help="Path to output results JSON")
+
     args = parser.parse_args()
 
     if args.command == "download":
@@ -84,6 +91,16 @@ def main() -> None:
             print(format_retrieval_output(args.query, results))
         else:
             run_interactive_mode(retriever=retriever, default_top_k=args.top_k)
+    elif args.command == "evaluate":
+        from app.evaluation.evaluator import format_evaluation_summary, run_evaluation_pipeline
+
+        results = run_evaluation_pipeline(
+            config_path=args.config,
+            top_k_list=args.top_k,
+            limit=args.limit,
+            output_path=args.output,
+        )
+        print(format_evaluation_summary(results))
     else:
         parser.print_help()
         sys.exit(0)

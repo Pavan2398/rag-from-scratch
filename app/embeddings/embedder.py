@@ -136,7 +136,7 @@ def encode_query(
     if not query.strip():
         raise ValueError("Query string cannot be empty.")
 
-    raw = model.encode([query], convert_to_numpy=True)
+    raw = model.encode([query], convert_to_numpy=True, show_progress_bar=False)
     vec = np.asarray(raw[0], dtype=np.float32)
     if normalize:
         vec = normalize_vectors(vec)
